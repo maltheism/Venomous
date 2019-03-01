@@ -1,0 +1,44 @@
+{
+  "name": "venomous",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "serve": "node dist/www.js",
+    "build": "babel src --out-dir dist",
+    "production": "webpack --mode production",
+    "development": "webpack --mode development",
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "start": "nodemon --delay 1500ms --exec babel-node ./bin/www.js",
+    "server": "nodemon --delay 2000ms --exec npm run babel-node -- $NODE_DEBUG_OPTION ./bin/www.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "helmet": "^3.15.1",
+    "helmet-csp": "^2.7.1",
+    "ip": "^1.1.5",
+    "mongoose": "^5.4.16",
+    "morgan": "~1.9.0",
+    "socket.io": "^2.2.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^0.5.0",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
