@@ -21,6 +21,8 @@ const client = {
     entry: {
         app: [
             './public/lib/app/main.js',
+            './public/lib/app/map/mapController.js',
+            './public/lib/app/websocket/client.js',
         ]
     },
     output: {
@@ -76,6 +78,8 @@ const styles = {
         app: [
             './public/stylesheets/fonts/style.css',
             './public/stylesheets/app/style.css',
+            './public/stylesheets/app/map/style.css',
+            './public/stylesheets/app/map/marker/style.css',
         ]
     },
     output: {

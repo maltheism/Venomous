@@ -12,14 +12,18 @@
   <link rel='stylesheet' type='text/css' href='dist/app.css'>
   <!-- //----------------------------------------------------| -->
 
-  <!-- //-| Include Gland.js |-------------------------------------| -->
+  <!-- //-| Include app.bundle.js |--------------------------------| -->
   <script type='text/javascript' src='dist/app.bundle.js'></script>
   <!-- //----------------------------------------------------------| -->
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+  <div id='menu'>
+    <div id='visitors'>Visitors: </div>
+  </div>
+  <div id='map'></div>
+  <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAly2xSkCUJUt8oXT89lztu_M2017oVMto&callback=initMap&libraries=places' async defer></script>
+  <script type='text/javascript' src='lib/thirdparty/overlapping-marker-spiderfier/oms.min.js' async defer></script>
 </body>
 
 </html>

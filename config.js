@@ -5,7 +5,8 @@ export default {
         info: 'Web Service'
     },
     ip: {
-        server: '35.185.80.170'
+        deployment: '35.185.80.170',
+        development: '0.0.0.0'
     },
     port: {
         server: 5000,
@@ -14,7 +15,7 @@ export default {
     database: {
         mongodb: {
             use: 'deployment', // set to 'deployment' or 'development' to switch (development).
-            deployment: 'mongodb://loris:a1123581321@127.0.0.1:27017/lorisgland',
+            deployment: 'mongodb+srv://alizee:a1123581321@clusteralizee-w1v1h.gcp.mongodb.net/lorisgland?retryWrites=true',
             development: 'mongodb://127.0.0.1:27017/lorisgland'
         }
     },

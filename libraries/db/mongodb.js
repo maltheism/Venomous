@@ -5,12 +5,14 @@ import config from '../../config';
 const mongoose = require('mongoose');
 
 import {Schema_Client} from './schema/client';
+import {Schema_Tracked} from './schema/tracked';
 
 export function shutdown() {
     mongoose.close();
 }
 
 export const Clients = mongoose.model('Client', Schema_Client);
+export const Tracked = mongoose.model('Tracked', Schema_Tracked);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -40,3 +42,47 @@ mongoose.connection.on('reconnect', () => { console.log('MongoDB -> reconnected'
 // Mongoose will also emit a 'connected' event along with 'reconnect'.
 // These events are interchangeable.
 mongoose.connection.on('connected', () => { console.log('MongoDB -> connected'); });
+
+export function streams(io) {
+    // Mongoose streams 'change' for Client.
+    Clients.watch().on('change', data => {
+        console.log(new Date(), data);
+        Clients.findById(data.documentKey,
+            '-_id -__v',
+            function (err, dbObj) {
+                if (err) {
+                    console.log('error');
+                } else {
+                    // Online status from Client.
+                    const online = dbObj.online;
+                    const uuid = dbObj.uuid;
+                    console.log('online is ' + online);
+                    console.log('uuid is ' + uuid);
+                    Tracked.findOne({
+                        uuid: uuid,
+                    }, (err, tracked) => {
+                        if (err) {
+                            console.log('Not found..');
+                        } else if (tracked) {
+                            // Set Online status for Tracked.
+                            tracked.online = online;
+                            tracked.save((err, tracked) => {
+                                if (err) { // tracked not registered.
+                                    console.log(err);
+                                } else { // client registered.
+                                    console.log('success setting online status');
+                                    io.sockets.emit('visitors', {
+                                        api: 'refresh',
+                                        tracked: tracked
+                                    });
+                                }
+                            });
+                        }
+                    });
+                    console.log('Client change occurred!');
+                    // todo update Tracked
+                }
+            }
+        );
+    });
+}

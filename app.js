@@ -19,7 +19,7 @@ import indexRouter from './routes/index';
 
 import * as mongodb from './libraries/db/mongodb';
 
-const cspWS = ip.address() === config.ip.server ?
+const cspWS = ip.address() === config.ip.deployment ?
     config.websocket.deployment :
     config.websocket.development;
 
@@ -39,12 +39,20 @@ app.use(csp({
         ],
         connectSrc: [
             `'self'`,
-            ...cspWS
+            ...cspWS,
+            'https://www.google-analytics.com/'
         ],
         scriptSrc: [
             `'self'`,
             `'unsafe-inline'`,
             `'unsafe-eval'`,
+            'https://apis.google.com',
+            'https://maps.gstatic.com/',
+            'https://maps.googleapis.com/',
+            'https://www.google-analytics.com/',
+            'https://www.googletagmanager.com/',
+            `https://www.google.com/recaptcha/`,
+            `https://www.gstatic.com/recaptcha/`
         ],
         styleSrc: [
             `'self'`,
@@ -60,10 +68,14 @@ app.use(csp({
         ],
         imgSrc: [
             `'self'`,
-            `data: *`
+            `data: *`,
+            'https://maps.google.com',
+            'https://maps.gstatic.com/',
+            'https://maps.googleapis.com/'
         ],
         frameSrc: [
-            `'self'`
+            `'self'`,
+            `https://www.google.com/recaptcha/`
         ],
         upgradeInsecureRequests: false
     }
@@ -83,13 +95,28 @@ const server = require('http').Server(app);
  * Socket.io websockets.
  */
 const io = require('socket.io')(server); // add socket.io 'websockets'.
-server.listen(config.port.socket); // listen for websockets on port 6660
+server.listen(config.port.socket,
+    ip.address() === config.ip.deployment ?
+        config.ip.deployment :
+        config.ip.development); // listen for websockets on port 6660
 
+
+io.set('heartbeat timeout', 60000);
+io.set('heartbeat interval', 25000);
+
+mongodb.streams(io);
+
+/**
+ * Socket.io events.
+ */
 io.on('connection', socket => {
     console.log('[*] Websocket connection found!' + '\n');
 
     const client = require('./libraries/client/client_middleware');
     client.socketHandler(socket);
+
+    const analytics = require('./libraries/analytics/tracked_middleware');
+    analytics.socketHandler(socket);
 
 });
 
