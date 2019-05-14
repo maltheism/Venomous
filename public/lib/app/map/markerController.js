@@ -129,6 +129,7 @@ Marker.prototype.populateUsers = function populateUsers(users) {
 
         google.maps.event.addListener(newMarker, 'spider_click', function() {
             console.log(users[i].uuid);
+            console.log(users[i]);
         });
 
         marker.users.markers.set(users[i].uuid, {
