@@ -99,10 +99,7 @@ const server = require('http').Server(app);
  * Socket.io websockets.
  */
 const io = require('socket.io')(server); // add socket.io 'websockets'.
-server.listen(config.port.socket,
-    ip.address() === config.ip.deployment ?
-        config.ip.deployment :
-        config.ip.development); // listen for websockets on port 6660
+server.listen(config.port.socket); // listen for websockets on port 6660
 
 
 io.set('heartbeat timeout', 60000);
