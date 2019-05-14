@@ -5,7 +5,7 @@ export default {
         info: 'Web Service'
     },
     ip: {
-        deployment: '35.185.80.170',
+        deployment: '35.185.53.135',
         development: '0.0.0.0'
     },
     port: {
@@ -21,10 +21,10 @@ export default {
     },
     websocket: {
         deployment: [
-            'ws://35.185.80.170',
-            'wss://35.185.80.170',
-            'http://35.185.80.170',
-            'https://35.185.80.170'
+            'ws://35.185.53.135',
+            'wss://35.185.53.135',
+            'http://35.185.53.135',
+            'https://35.185.53.135'
         ],
         development: [
             'ws://localhost:6660',

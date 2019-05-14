@@ -42,12 +42,18 @@ Client.prototype.authentication = function authentication(cb) {
     storage.saveUuidAndToken();
     // Create websocket for connecting.
     let websocket = null;
-    if (window.origin.includes('https://')) {
-        // Production
-        websocket = io.connect('https://35.185.80.170', {
-            secure: true,
-            port: 80,
-        });
+    // Production
+    if (window.origin.includes('35.185.53.135')) {
+        if (window.origin.includes('https://')) {
+            websocket = io.connect('https://35.185.53.135/', {
+                secure: true,
+                port: 80,
+            });
+        } else {
+            websocket = io.connect('http://35.185.53.135/', {
+                transports: ['websocket', 'polling'],
+            });
+        }
     } else {
         // Development
         websocket = io.connect('localhost:6660', {
