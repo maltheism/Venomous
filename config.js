@@ -5,7 +5,7 @@ export default {
         info: 'Web Service'
     },
     ip: {
-        deployment: '35.185.53.135',
+        deployment: '10.142.0.3',
         development: '0.0.0.0'
     },
     port: {
