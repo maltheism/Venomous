@@ -23,6 +23,8 @@ const cspWS = ip.address() === config.ip.deployment ?
     config.websocket.deployment :
     config.websocket.development;
 
+console.log(cspWS);
+
 /**
  * Express.js server.
  */
