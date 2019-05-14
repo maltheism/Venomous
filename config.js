@@ -21,10 +21,10 @@ export default {
     },
     websocket: {
         deployment: [
-            'ws://35.185.53.135',
-            'wss://35.185.53.135',
-            'http://35.185.53.135',
-            'https://35.185.53.135'
+            'ws://xn--alize-esa.com',
+            'wss://xn--alize-esa.com',
+            'http://xn--alize-esa.com',
+            'https://xn--alize-esa.com'
         ],
         development: [
             'ws://localhost:6660',
