@@ -91,6 +91,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('trust proxy', ip.address() === config.ip.deployment);
+
 app.use('/', indexRouter);
 
 const server = require('http').Server(app);
@@ -101,13 +103,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server); // add socket.io 'websockets'.
 server.listen(config.port.socket); // listen for websockets on port 6660
 
-app.set('trust proxy', ip.address() === config.ip.deployment);
-
-
 io.set('heartbeat timeout', 60000);
 io.set('heartbeat interval', 25000);
-
-mongodb.streams(io);
 
 /**
  * Socket.io events.
@@ -122,6 +119,8 @@ io.on('connection', socket => {
     analytics.socketHandler(socket);
 
 });
+
+mongodb.streams(io);
 
 /**
  * Server shutdown.
