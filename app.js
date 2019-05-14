@@ -101,7 +101,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server); // add socket.io 'websockets'.
 server.listen(config.port.socket); // listen for websockets on port 6660
 
-app.set('trust proxy', ip.address() === config.ip.server);
+app.set('trust proxy', ip.address() === config.ip.deployment);
 
 
 io.set('heartbeat timeout', 60000);
