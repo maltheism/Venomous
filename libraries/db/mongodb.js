@@ -8,7 +8,9 @@ import {Schema_Client} from './schema/client';
 import {Schema_Tracked} from './schema/tracked';
 
 export function shutdown() {
-    mongoose.close();
+    mongoose.disconnect().then(() => {
+        console.log('Mongoose connection is disconnected due to application termination');
+    });
 }
 
 export const Clients = mongoose.model('Client', Schema_Client);
