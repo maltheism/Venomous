@@ -1,6 +1,7 @@
 'use strict';
 
 import {map} from './mapController';
+import Swal from 'sweetalert2';
 
 class Marker {
     constructor() {
@@ -132,6 +133,13 @@ Marker.prototype.populateUsers = function populateUsers(users) {
             console.log(users[i].uuid);
             console.log('details:');
             console.log(users[i]);
+
+            Swal.fire({
+                title: 'User Details',
+                text: JSON.stringify(users[i]),
+                type: 'info',
+                confirmButtonText: 'Okay!'
+            })
         });
 
         marker.users.markers.set(users[i].uuid, {

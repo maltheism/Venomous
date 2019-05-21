@@ -21,6 +21,7 @@ const client = {
     entry: {
         app: [
             './public/lib/app/main.js',
+            './public/lib/app/map/mapStyle.js',
             './public/lib/app/map/mapController.js',
             './public/lib/app/websocket/client.js',
         ]

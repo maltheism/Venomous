@@ -1,3 +1,58 @@
 #map {
     height: calc(100vh);
 }
+
+/* Display the control once it is inside the map. */
+#map .map-control {
+    display: block;
+}
+
+.selector-control {
+    font-size: 14px;
+    line-height: 30px;
+    vertical-align: baseline;
+}
+
+a[href^='http://maps.google.com/maps'],
+a[href^='https://maps.google.com/maps'],
+a[href^='https://www.google.com/maps'] {
+    display: none !important;
+}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display: none;
+}
+
+.gmnoprint div {
+    background: none !important;
+}
+
+.gm-style-cc {
+    display: none;
+}
+
+.gm-bundled-control .gmnoprint {
+    display: block;
+}
+
+.gmnoprint:not(.gm-bundled-control) {
+    display: none;
+}
+.pac-container {
+    margin-left: -62px;
+    width: 378px !important;
+}
+.pac-item {
+    height: 60px !important;
+}
+.pac-icon {
+    margin-top: 20px;
+}
+.pac-item-query {
+    height: 60px !important;
+    line-height: 60px !important;
+}
+.pac-container:after {
+    height: 0;
+    background-image: none !important;
+}

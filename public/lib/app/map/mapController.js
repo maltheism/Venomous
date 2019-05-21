@@ -1,6 +1,7 @@
 'use strict';
 
 import {client} from '../websocket/client';
+import {mapStyles} from './mapStyle';
 
 class GoogleMap {
     /**
@@ -55,8 +56,8 @@ GoogleMap.prototype.setupMap = function setupMap() {
     // assign google map to map.self with configurations.
     map.self = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 45.50939899904717,
-            lng: -73.57699655689282
+            lat: 45.50539899904600,
+            lng: -73.57699655689082
         },
         zoom: 16,
         mapTypeControl: false,
@@ -83,6 +84,9 @@ GoogleMap.prototype.setupMap = function setupMap() {
             clearInterval(refresh);
         }
     }, 500);
+
+    // Style the map
+    map.self.setOptions({styles: mapStyles['light']})
 };
 
 window.initMap = initMap;
