@@ -80,6 +80,7 @@ const styles = {
             './public/stylesheets/fonts/style.css',
             './public/stylesheets/app/style.css',
             './public/stylesheets/app/map/style.css',
+            './public/stylesheets/app/menu/style.css',
             './public/stylesheets/app/map/marker/style.css',
         ]
     },
