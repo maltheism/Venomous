@@ -75,6 +75,14 @@ Marker.prototype.updateUser = function updateUser(user) {
 
         google.maps.event.addListener(newMarker, 'spider_click', function() {
             console.log(user.uuid);
+            console.log(user);
+
+            Swal.fire({
+                title: 'User Details',
+                text: JSON.stringify(user),
+                type: 'info',
+                confirmButtonText: 'Okay!'
+            });
         });
 
         marker.users.markers.set(user.uuid, {
@@ -139,7 +147,7 @@ Marker.prototype.populateUsers = function populateUsers(users) {
                 text: JSON.stringify(users[i]),
                 type: 'info',
                 confirmButtonText: 'Okay!'
-            })
+            });
         });
 
         marker.users.markers.set(users[i].uuid, {
