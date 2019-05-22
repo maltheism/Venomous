@@ -10,6 +10,7 @@ import {Tracked} from '../db/mongodb';
  * @param cb
  */
 export function registerTracked(data, cb) {
+    console.log('registerTracked called:');
     Tracked.findOne({ uuid: data.uuid }, (err, tracked) => {
         if (tracked) {
             // Already exists.
@@ -51,7 +52,7 @@ export function registerTracked(data, cb) {
 
 export function getLocation(data, cb) {
 
-    console.log('CHECK:');
+    console.log('getLocation called for IP:');
     console.log(data.ipAddress);
 
     // Debug Mode.

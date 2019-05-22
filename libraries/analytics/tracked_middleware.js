@@ -26,20 +26,16 @@ export function socketHandler(socket) {
         // Get location info.
         Tracked.getLocation(data, function(error, data) {
             if (error) {
-
+                //return; TODO: return error message.
             }
-            // Console.log(data)
-            console.log(data);
-            // todo Store in db.
+            // console.log(data);
             Client.getUUID(socket, function(uuid) {
-                console.log(uuid);
                 data.uuid = uuid;
                 Tracked.registerTracked(data, function(error, tracked) {
                     if (error) {
-                        console.log('error happened');
-                        console.log(error);
+                        console.log(error); // TODO: return error message.
                     } else {
-                        console.log(tracked);
+                        console.log(tracked); // TODO: ? maybe return success message.
                     }
                 });
             });

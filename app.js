@@ -19,13 +19,9 @@ import indexRouter from './routes/index';
 
 import * as mongodb from './libraries/db/mongodb';
 
-console.log(ip.address());
-
 const cspWS = ip.address() === config.ip.deployment ?
     config.websocket.deployment :
     config.websocket.development;
-
-console.log(cspWS);
 
 /**
  * Express.js server.
