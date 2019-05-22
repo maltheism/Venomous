@@ -56,32 +56,34 @@ export function streams(io) {
                     console.log('error');
                 } else {
                     // Online status from Client.
-                    const online = dbObj.online;
-                    const uuid = dbObj.uuid;
-                    console.log('online is ' + online);
-                    console.log('uuid is ' + uuid);
-                    Tracked.findOne({
-                        uuid: uuid,
-                    }, (err, tracked) => {
-                        if (err) {
-                            console.log('Not found..');
-                        } else if (tracked) {
-                            // Set Online status for Tracked.
-                            tracked.online = online;
-                            tracked.save((err, tracked) => {
-                                if (err) { // tracked not registered.
-                                    console.log(err);
-                                } else { // client registered.
-                                    console.log('success setting online status');
-                                    io.sockets.emit('visitors', {
-                                        api: 'refresh',
-                                        tracked: tracked
-                                    });
-                                }
-                            });
-                        }
-                    });
                     console.log('Client change occurred!');
+                    if (dbObj.online && dbObj.uuid) {
+                        const online = dbObj.online;
+                        const uuid = dbObj.uuid;
+                        console.log('online is ' + online);
+                        console.log('uuid is ' + uuid);
+                        Tracked.findOne({
+                            uuid: uuid,
+                        }, (err, tracked) => {
+                            if (err) {
+                                console.log('Not found..');
+                            } else if (tracked) {
+                                // Set Online status for Tracked.
+                                tracked.online = online;
+                                tracked.save((err, tracked) => {
+                                    if (err) { // tracked not registered.
+                                        console.log(err);
+                                    } else { // client registered.
+                                        console.log('success setting online status');
+                                        io.sockets.emit('visitors', {
+                                            api: 'refresh',
+                                            tracked: tracked
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
                     // todo update Tracked
                 }
             }
