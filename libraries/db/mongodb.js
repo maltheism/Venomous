@@ -68,6 +68,7 @@ export function streams(io) {
                             if (err) {
                                 console.log('Not found..');
                             } else if (tracked) {
+                                console.log('tracked exists');
                                 // Set Online status for Tracked.
                                 tracked.online = online;
                                 tracked.save((err, tracked) => {
@@ -81,6 +82,8 @@ export function streams(io) {
                                         });
                                     }
                                 });
+                            } else {
+                                console.log('debug this');
                             }
                         });
                     }
