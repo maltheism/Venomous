@@ -54,52 +54,60 @@ Marker.prototype.updateUser = function updateUser(user) {
                             "<div class='pulse'></div>" +
                         "</div>";
         if (marker.users.details.has(user.uuid)) {
+            // Marker already exists
             const temp = marker.users.markers.get(user.uuid);
-            temp.setMap(null);
-            animation = false;
-        }
-        marker.users.details.set(user.uuid, user);
+            temp.marker.setPosition(
+                new google.maps.LatLng(
+                    user[i].loc.coordinates[1],
+                    user[i].loc.coordinates[0]
+                )
+            );
+        } else {
+            // New Marker
+            marker.users.details.set(user.uuid, user);
 
-        const newMarker = new google.maps.Marker({
-            map: map.self,
-            position: {
-                lat: user.loc.coordinates[1],
-                lng: user.loc.coordinates[0]
-            },
-            animation: animation ? google.maps.Animation.DROP : '',
-            cursor: 'pointer',
-            draggable: false,
-            content: content,
-            zIndex: -26
-        });
-
-        google.maps.event.addListener(newMarker, 'spider_click', function() {
-            console.log(user.uuid);
-            console.log(user);
-
-            Swal.fire({
-                title: 'User Details',
-                text: JSON.stringify(user),
-                type: 'info',
-                confirmButtonText: 'Okay!'
+            const newMarker = new google.maps.Marker({
+                map: map.self,
+                position: {
+                    lat: user.loc.coordinates[1],
+                    lng: user.loc.coordinates[0]
+                },
+                animation: animation ? google.maps.Animation.DROP : '',
+                cursor: 'pointer',
+                draggable: false,
+                content: content,
+                zIndex: -26
             });
-        });
 
-        marker.users.markers.set(user.uuid, {
-            uuid: user.uuid,
-            marker: newMarker
-        });
-        console.log('CHECK:');
-        console.log(marker.users.markers);
+            google.maps.event.addListener(newMarker, 'spider_click', function () {
+                console.log(user.uuid);
+                console.log(user);
 
-        const refresh = setInterval(function() {
-            if (OverlappingMarkerSpiderfier && map.oms) {
-                // Adds the marker to the spiderfier _and_ the map
-                console.log('add marker');
-                map.oms.addMarker(newMarker);
-                clearInterval(refresh);
-            }
-        }, 500);
+                Swal.fire({
+                    title: 'User Details',
+                    text: JSON.stringify(user),
+                    type: 'info',
+                    confirmButtonText: 'Okay!'
+                });
+            });
+
+            marker.users.markers.set(user.uuid, {
+                uuid: user.uuid,
+                marker: newMarker
+            });
+            console.log('CHECK:');
+            console.log(marker.users.markers);
+
+            const refresh = setInterval(function () {
+                if (OverlappingMarkerSpiderfier && map.oms) {
+                    // Adds the marker to the spiderfier _and_ the map
+                    console.log('add marker');
+                    map.oms.addMarker(newMarker);
+                    clearInterval(refresh);
+                }
+            }, 500);
+        }
+
     }
     marker.onlineTotal();
 };
@@ -118,7 +126,7 @@ Marker.prototype.populateUsers = function populateUsers(users) {
                         "</div>";
         if (marker.users.details.has(users[i].uuid)) {
             const temp = marker.users.markers.get(users[i].uuid);
-            temp.setMap(null);
+            temp.marker.setMap(null);
             animation = false;
         }
         marker.users.details.set(users[i].uuid, users[i]);
