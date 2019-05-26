@@ -64,7 +64,7 @@ Client.prototype.authentication = function authentication(cb) {
                     uuid: storage.socket.config.uuid,
                     token: storage.socket.config.token,
                 });
-            } else if (storage.socket.config.token) { // no token, emit client_register
+            } else if (storage.socket.config.token === '') { // no token, emit client_register
                 websocket.emit('client_register', storage.socket.config,
                     function(ident) {
                         console.log('[client_register] :\n');
