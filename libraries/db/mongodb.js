@@ -57,6 +57,7 @@ export function streams(io) {
                 } else {
                     // Online status from Client.
                     console.log('Client change occurred!');
+                    console.log(dbObj);
                     if (dbObj && dbObj.online && dbObj.uuid) {
                         const online = dbObj.online;
                         const uuid = dbObj.uuid;
