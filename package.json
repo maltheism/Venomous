@@ -42,7 +42,7 @@
     "mini-css-extract-plugin": "^0.8.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.1.0",
-    "webpack": "^4.39.1",
+    "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2"
   }
