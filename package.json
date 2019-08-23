@@ -27,8 +27,8 @@
     "node-geocoder": "^3.23.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
-    "sweetalert2": "^8.15.3",
-    "uuid": "^3.3.2"
+    "sweetalert2": "^8.16.2",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -43,7 +43,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.1.0",
     "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
+    "webpack-cli": "^3.3.7",
     "webpack-node-externals": "^1.7.2"
   }
 }
