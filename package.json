@@ -22,7 +22,7 @@
     "ip": "^1.1.5",
     "iplocation": "^6.1.0",
     "js-cookie": "^2.2.1",
-    "mongoose": "^5.7.10",
+    "mongoose": "^5.7.12",
     "morgan": "~1.9.0",
     "node-geocoder": "^3.25.0",
     "socket.io": "^2.3.0",
@@ -41,7 +41,7 @@
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.8.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "url-loader": "^2.2.0",
+    "url-loader": "^2.3.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-node-externals": "^1.7.2"
